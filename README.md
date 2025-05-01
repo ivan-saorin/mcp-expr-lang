@@ -1,5 +1,7 @@
 # MCP Expr-Lang
 
+[![smithery badge](https://smithery.ai/badge/@ivan-saorin/mcp-expr-lang)](https://smithery.ai/server/@ivan-saorin/mcp-expr-lang)
+
 A powerful expression evaluation tool for Claude Desktop using the Model Context Protocol (MCP).
 
 ## Overview
@@ -16,6 +18,14 @@ With MCP Expr-Lang, you can:
 - And much more!
 
 ## Installation
+
+### Installing via Smithery
+
+To install MCP Expr-Lang for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@ivan-saorin/mcp-expr-lang):
+
+```bash
+npx -y @smithery/cli install @ivan-saorin/mcp-expr-lang --client claude
+```
 
 ### Prerequisites
 
