@@ -1,4 +1,8 @@
-remote_theme: devich/quick@0.0.1
+lang: en-US
+bg_color: dark
+# theme-color is the main accent color and can be 
+theme_color: azure
 title: MCP Expr-Lang: Expression Evaluation Tool for Claude Desktop.
 description: A powerful expression evaluation tool that integrates the expr-lang engine with Claude AI through the Model Context Protocol (MCP), enabling complex data manipulations and calculations directly in Claude conversations.
 keywords: claude, ai, mcp, model context protocol, expr-lang, expression evaluation, data manipulation, golang, tool, claude desktop, calculation, data transformation, array manipulation, sorting, filtering, mathematical expressions
+remote_theme: devich/quick@0.0.1
