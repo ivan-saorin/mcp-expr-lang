@@ -112,6 +112,8 @@ Result: The expression returns the users sorted by age in descending order:
 ]
 ```
 
+For more examples please see [EXAMPLES](./EXAMPLES.md)
+
 ## Features
 
 MCP Expr-Lang supports all features of the expr-lang engine, including:

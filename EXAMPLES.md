@@ -5,7 +5,8 @@ The `eval` tool allows you to evaluate expressions using the powerful expr langu
 ## Basic Operations
 
 ### Arithmetic Operations
-```
+
+```text
 eval("10 + 5")         // Result: 15
 eval("10 - 5")         // Result: 5
 eval("10 * 5")         // Result: 50
@@ -15,13 +16,15 @@ eval("2 ^ 3")          // Result: 8 (exponentiation)
 ```
 
 ### String Operations
-```
+
+```text
 eval("'Hello' + ' ' + 'World'")  // Result: "Hello World"
 eval("len('Hello')")             // Result: 5
 ```
 
 ### Boolean Operations
-```
+
+```text
 eval("true and false")           // Result: false
 eval("true or false")            // Result: true
 eval("!true")                    // Result: false
@@ -33,13 +36,15 @@ eval("'a' in ['a', 'b', 'c']")   // Result: true
 ## Working with Arrays
 
 ### Array Creation and Access
-```
+
+```text
 eval("[1, 2, 3, 4, 5]")          // Result: [1, 2, 3, 4, 5]
 eval("[1, 2, 3][1]")             // Result: 2 (zero-based indexing)
 ```
 
 ### Array Functions
-```
+
+```text
 eval("len([1, 2, 3, 4, 5])")     // Result: 5
 eval("map([1, 2, 3], # * 2)")    // Result: [2, 4, 6]
 eval("filter([1, 2, 3, 4], # > 2)") // Result: [3, 4]
@@ -49,14 +54,16 @@ eval("sum([1, 2, 3, 4])")        // Result: 10
 ```
 
 ### Sorting Arrays
-```
+
+```text
 eval("sort([3, 1, 4, 2])")       // Result: [1, 2, 3, 4]
 ```
 
 ## Working with Maps/Objects
 
 ### Map Creation and Access
-```
+
+```text
 eval("{a: 1, b: 2, c: 3}")       // Result: {"a": 1, "b": 2, "c": 3}
 eval("{a: 1, b: 2}.a")           // Result: 1
 ```
@@ -64,7 +71,8 @@ eval("{a: 1, b: 2}.a")           // Result: 1
 ## Complex Examples
 
 ### Filtering and Transforming Data
-```
+
+```text
 users = [{"Name": "John", "Age": 30}, {"Name": "Ivan", "Age": 51}, {"Name": "Eve", "Age": 15}]
 eval("filter(users, .Age >= 18)")  
 // Result: [{"Name": "John", "Age": 30}, {"Name": "Ivan", "Age": 51}]
@@ -74,7 +82,8 @@ eval("map(users, {name: .Name, isAdult: .Age >= 18})")
 ```
 
 ### Sorting Complex Data
-```
+
+```text
 users = [{"Name": "John", "Age": 30}, {"Name": "Ivan", "Age": 51}, {"Name": "Eve", "Age": 15}]
 eval("sortBy(users, .Age, 'desc')")
 // Result: [{"Name": "Ivan", "Age": 51}, {"Name": "John", "Age": 30}, {"Name": "Eve", "Age": 15}]
@@ -84,7 +93,8 @@ eval("sortBy(users, .Name)")
 ```
 
 ### Aggregation Functions
-```
+
+```text
 products = [{"Name": "Apple", "Price": 0.5, "Quantity": 10}, {"Name": "Banana", "Price": 0.3, "Quantity": 15}, {"Name": "Orange", "Price": 0.6, "Quantity": 8}]
 eval("sum(map(products, .Price * .Quantity))")
 // Result: 13.3 (total value of inventory)
@@ -94,14 +104,16 @@ eval("reduce(products, 0, acc + .Price * .Quantity)")
 ```
 
 ### Conditional Logic
-```
+
+```text
 users = [{"Name": "John", "Age": 30}, {"Name": "Ivan", "Age": 51}, {"Name": "Eve", "Age": 15}]
 eval("map(users, {name: .Name, status: .Age < 18 ? 'minor' : (.Age >= 65 ? 'senior' : 'adult')})")
 // Result: [{"name": "John", "status": "adult"}, {"name": "Ivan", "status": "adult"}, {"name": "Eve", "status": "minor"}]
 ```
 
 ### String Manipulation
-```
+
+```text
 eval("upper('hello')")           // Result: "HELLO"
 eval("lower('HELLO')")           // Result: "hello"
 eval("trim(' hello ')")          // Result: "hello"
@@ -109,7 +121,8 @@ eval("split('a,b,c', ',')")      // Result: ["a", "b", "c"]
 ```
 
 ### Date Functions
-```
+
+```text
 eval("now()")                    // Result: current timestamp
 eval("now().Year")               // Result: current year
 eval("now().Format('2006-01-02')") // Result: current date formatted as YYYY-MM-DD
@@ -118,21 +131,25 @@ eval("now().Format('2006-01-02')") // Result: current date formatted as YYYY-MM-
 ## Advanced Features
 
 ### Function Composition
-```
+
+```text
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 eval("sum(filter(numbers, # % 2 == 0))")
 // Result: 30 (sum of even numbers)
 ```
 
 ### Custom Environment Variables
+
 You can provide custom variables in the environment:
-```
+
+```text
 // With env: {"x": 10, "y": 20}
 eval("x + y")                    // Result: 30
 ```
 
 ### Regular Expressions
-```
+
+```text
 eval("match('hello world', 'hello')")  // Result: true
 eval("replace('hello world', 'hello', 'hi')") // Result: "hi world"
 ```
