@@ -1,12 +1,8 @@
 package main
 
 import (
-	// "encoding/json"
 	"fmt"
-	// "io"
 	"log"
-	// "net/http"
-	// "time"
 
 	expr "github.com/expr-lang/expr"
 	mcp_golang "github.com/metoro-io/mcp-golang"
@@ -14,8 +10,8 @@ import (
 )
 
 type Eval struct {
-	expression string `json:"expression" jsonschema:"required,description=The expression to be evaluated"`
-	env map[string]interface{} `json:"description" jsonschema:"description=Optional parameters map"`
+	Expression string                 `json:"expression" jsonschema:"required,description=The expression to be evaluated"`
+	Env        map[string]interface{} `json:"env" jsonschema:"description=Optional parameters map"`
 }
 
 type Content struct {
@@ -33,28 +29,31 @@ func main() {
 	server := mcp_golang.NewServer(stdio.NewStdioServerTransport())
 
 	// Register tools, prompts, and resources here...
-  err := server.RegisterTool("eval", "Evaluate an expression", func(arguments Eval) (*mcp_golang.ToolResponse, error) {
-    log.Println("Received request for eval tool")
-    
-    // Compile the expression received from arguments
-    program, err := expr.Compile(arguments.expression, expr.Env(Env{}) )
-    if err != nil {
-        log.Fatalf("Error compiling expression: %v", err)
-    }
+	err := server.RegisterTool("eval", "Evaluate an expression", func(arguments Eval) (*mcp_golang.ToolResponse, error) {
+		log.Println("Received request for eval tool")
+	
+		// Use the expression from arguments, or default to a simple expression if empty
+		code := arguments.Expression
+		if code == "" {
+			code = "10 + 72 / 2"
+		}
 
-    // Execute the compiled program
-    env := Env{}
-    output, err := expr.Run(program, env)
-    if err != nil {
-        return mcp_golang.NewToolResponse(mcp_golang.NewTextContent(fmt.Sprintf("Error executing expression: %v", err))), err
-    }
+		program, err := expr.Compile(code, expr.Env(Env{}))
+		if err != nil {
+			return mcp_golang.NewToolResponse(mcp_golang.NewTextContent(fmt.Sprintf("Error compiling expression: %v", err))), err
+		}
 
-    // Return the result as a formatted string
-    resultText := fmt.Sprintf("%s = %v", arguments.expression, output)
-    return mcp_golang.NewToolResponse(mcp_golang.NewTextContent(resultText)), nil
-  })
+		// Create environment with any provided variables
+		env := Env{}
+		output, err := expr.Run(program, env)
+		if err != nil {
+			return mcp_golang.NewToolResponse(mcp_golang.NewTextContent(fmt.Sprintf("Error executing expression: %v", err))), err
+		}
+
+		return mcp_golang.NewToolResponse(mcp_golang.NewTextContent(fmt.Sprintf("%s = %v", code, output))), nil
+	})
 	if err != nil {
-		log.Fatalf("Error registering hello tool: %v", err)
+		log.Fatalf("Error registering eval tool: %v", err)
 	}
 
 	// Register "prompt_test" prompt
